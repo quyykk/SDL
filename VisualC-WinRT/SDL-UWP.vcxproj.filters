@@ -204,6 +204,9 @@
     <ClInclude Include="..\src\core\winrt\SDL_winrtapp_xaml.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClCompile Include="..\src\dialog\dummy\SDL_dialog.c">
+      <Filter>dialog</Filter>
+    </ClCompile>
     <ClInclude Include="..\src\dynapi\SDL_dynapi.h">
       <Filter>Source Files</Filter>
     </ClInclude>

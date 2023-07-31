@@ -905,3 +905,6 @@
 #define SDL_strnlen SDL_strnlen_REAL
 #define SDL_AddGamepadMappingsFromFile SDL_AddGamepadMappingsFromFile_REAL
 #define SDL_ReloadGamepadMappings SDL_ReloadGamepadMappings_REAL
+#define SDL_ShowOpenFileDialog SDL_ShowOpenFileDialog_REAL
+#define SDL_ShowSaveFileDialog SDL_ShowSaveFileDialog_REAL
+#define SDL_ShowOpenFolderDialog SDL_ShowOpenFolderDialog_REAL

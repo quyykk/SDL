@@ -250,6 +250,7 @@ set(SDL_SUBSYSTEMS
   File
   Loadso
   CPUinfo
+  Dialog
   Filesystem
   Sensor
   Locale
@@ -2337,7 +2338,7 @@ elseif(HAIKU)
   sdl_glob_sources("${SDL3_SOURCE_DIR}/src/core/haiku/*.cc")
 
   CheckPTHREAD()
-  sdl_link_dependency(base LIBS root be media game device textencoding)
+  sdl_link_dependency(base LIBS root be media game device textencoding tracker)
 
 elseif(RISCOS)
   if(SDL_MISC)
@@ -2707,6 +2708,22 @@ if(HAVE_VULKAN AND NOT SDL_LOADSO)
   set(SDL_VIDEO_VULKAN 0)
 endif()
 
+if (SDL_DIALOG)
+  if(UNIX AND NOT APPLE AND NOT RISCOS AND NOT HAIKU)
+    sdl_sources(${SDL3_SOURCE_DIR}/src/dialog/unix/SDL_dialog.c)
+    set(HAVE_SDL_DIALOG TRUE)
+  elseif(HAIKU)
+    sdl_sources(${SDL3_SOURCE_DIR}/src/dialog/haiku/SDL_dialog.cc)
+    set(HAVE_SDL_DIALOG TRUE)
+  elseif(WINDOWS AND NOT WINDOWS_STORE)
+    sdl_sources(${SDL3_SOURCE_DIR}/src/dialog/windows/SDL_dialog.c)
+    set(HAVE_SDL_DIALOG TRUE)
+  elseif(APPLE)
+    sdl_sources(${SDL3_SOURCE_DIR}/src/dialog/cocoa/SDL_dialog.m)
+    set(HAVE_SDL_DIALOG TRUE)
+  endif()
+endif()
+
 # Platform-independent options
 
 if(SDL_VIDEO)
@@ -2761,6 +2778,10 @@ endif()
 if(NOT HAVE_SDL_MISC)
   set(SDL_MISC_DUMMY 1)
   sdl_glob_sources("${SDL3_SOURCE_DIR}/src/misc/dummy/*.c")
+endif()
+if(NOT HAVE_SDL_DIALOG)
+  set(SDL_DIALOG_DUMMY 1)
+  sdl_sources(${SDL3_SOURCE_DIR}/src/dialog/dummy/SDL_dialog.c)
 endif()
 
 # We always need to have threads and timers around
