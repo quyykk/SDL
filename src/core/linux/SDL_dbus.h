@@ -44,6 +44,7 @@ typedef struct SDL_DBusContext
     void (*connection_set_exit_on_disconnect)(DBusConnection *, dbus_bool_t);
     dbus_bool_t (*connection_get_is_connected)(DBusConnection *);
     dbus_bool_t (*connection_add_filter)(DBusConnection *, DBusHandleMessageFunction, void *, DBusFreeFunction);
+    void (*connection_remove_filter)(DBusConnection *, DBusHandleMessageFunction, void *);
     dbus_bool_t (*connection_try_register_object_path)(DBusConnection *, const char *,
                                                        const DBusObjectPathVTable *, void *, DBusError *);
     dbus_bool_t (*connection_send)(DBusConnection *, DBusMessage *, dbus_uint32_t *);
@@ -64,6 +65,7 @@ typedef struct SDL_DBusContext
     dbus_bool_t (*message_iter_close_container)(DBusMessageIter *, DBusMessageIter *);
     dbus_bool_t (*message_get_args)(DBusMessage *, DBusError *, int, ...);
     dbus_bool_t (*message_get_args_valist)(DBusMessage *, DBusError *, int, va_list);
+    dbus_bool_t (*message_has_path)(DBusMessage *, const char *);
     dbus_bool_t (*message_iter_init)(DBusMessage *, DBusMessageIter *);
     dbus_bool_t (*message_iter_next)(DBusMessageIter *);
     void (*message_iter_get_basic)(DBusMessageIter *, void *);

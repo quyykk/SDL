@@ -17,6 +17,10 @@
 
 static void callback(const char* const* files, void* ptr) {
     if (files) {
+        if (!*files) {
+            SDL_Log("Cancelled\n");
+            return;
+        }
         while (*files) {
             SDL_Log("'%s'\n", *files);
             files++;
